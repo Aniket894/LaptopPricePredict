@@ -1,0 +1,229 @@
+<html>
+  <head>
+    <title>Laptop Price Prediction</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+      }
+  
+      form {
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        background: linear-gradient(to right, #007bff, #1e56b3);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+  
+      .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+  
+      label {
+        width: 120px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+      }
+  
+      input[type="text"],
+      select {
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-bottom: 2px solid #fff;
+        background-color: transparent;
+        color: #fff;
+      }
+  
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' height='24' viewBox='0 0 24 24' width='24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E") no-repeat right 10px center;
+      }
+  
+      input[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+  
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+  
+      /* Additional styles for a gradient futuristic look */
+      body {
+        background-color: #f5f5f5;
+      }
+  
+      form {
+        border: none;
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+      }
+  
+      input[type="text"]:focus,
+      select:focus {
+        outline: none;
+        border-bottom: 2px solid #fff;
+      }
+  
+      input[type="submit"] {
+        background-color: #007bff;
+        border: none;
+      }
+  
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+<body>
+<form action="{{url_for('predict_datapoint')}}" method="POST">
+    
+
+    <div class="form-group">
+        <label for="CPU">CPU:</label>
+        <input type="text" id="CPU" name="CPU" placeholder="Enter CPU name(str)">
+    </div>
+
+    <div class="form-group">  
+        <label for="RAM">RAM:</label>
+        <input type="text" id="RAM" name="RAM" placeholder="Enter RAM value (int)">
+    </div>
+    
+    <div class="form-group">
+        <label for="Storage">Storage:</label>
+        <input type="text" id="Storage" name="Storage" placeholder="Enter Storage value (int)">
+    </div>
+  
+    <div class="form-group">
+        <label for="Storage_type">Storage type:</label>
+        <input type="text" id="Storage_type"name="Storage_type" placeholder="Enter Storage_type (str)">
+    </div>
+  
+    <div class="form-group">
+        <label for="GPU">GPU:</label>
+        <input type="text" id="GPU" name="GPU" placeholder="Enter GPU name (str)">
+    </div>
+    <div class="form-group">
+      <label for="Screen">Screen:</label>
+      <input type="text" id="Screen" name="Screen" placeholder="Enter Screen size (float)">
+  </div>         
+  
+  <div class="form-group">
+    <label for="cpu">CPU:</label>
+    <select id="cpu" name="cpu">
+      <option value="Intel Celeron">Intel Celeron</option>
+      <option value="Microsoft SQ1">Microsoft SQ1</option>
+      <option value="Qualcomm Snapdragon 7">Qualcomm Snapdragon 7</option>
+      <option value="Qualcomm Snapdragon 8">Qualcomm Snapdragon 8</option>
+      <option value="Mediatek MT8183">Mediatek MT8183</option>
+      <option value="AMD 3015e">AMD 3015e</option>
+      <option value="AMD 3015Ce">AMD 3015Ce</option>
+      <option value="AMD 3020e">AMD 3020e</option>
+      <option value="AMD Athlon">AMD Athlon</option>
+      <option value="Intel Core M3">Intel Core M3</option>
+      <option value="AMD Radeon 5">AMD Radeon 5</option>
+      <option value="Intel Pentium">Intel Pentium</option>
+      <option value="Apple M2">Apple M2</option>
+      <option value="Apple M2 Pro">Apple M2 Pro</option>
+      <option value="AMD Radeon 9">AMD Radeon 9</option>
+      <option value="Intel Core i3">Intel Core i3</option>
+      <option value="AMD Ryzen 3">AMD Ryzen 3</option>
+      <option value="Intel Evo Core i5">Intel Evo Core i5</option>
+      <option value="Intel Evo Core i7">Intel Evo Core i7</option>
+      <option value="Intel Evo Core i9">Intel Evo Core i9</option>
+      <option value="AMD Ryzen 5">AMD Ryzen 5</option>
+      <option value="Apple M1">Apple M1</option>
+      <option value="Apple M1 Pro">Apple M1 Pro</option>
+      <option value="Intel Core i5">Intel Core i5</option>
+      <option value="Intel Core i7">Intel Core i7</option>
+      <option value="AMD Ryzen 7">AMD Ryzen 7</option>
+      <option value="Intel Core i9">Intel Core i9</option>
+      <option value="AMD Ryzen 9">AMD Ryzen 9</option>
+    </select>
+  </div>
+  
+  
+<div class="form-group">
+  <label for="Storage_type">Storage_type:</label>
+  <select id="Storage_type" name="Storage_type">
+    <option value="eMMC">eMMC</option>
+    <option value="SSD">SSD</option>
+   
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="GPU">GPU:</label>
+  <select id="GPU" name="GPU">
+    <option value="A 370M">A 370M</option>
+    <option value="610 M">610 M</option>
+    <option value="A 730M">A 730M</option>
+    <option value="GTX 1050">GTX 1050</option>
+    <option value="GTX 1070">GTX 1070</option>
+    <option value="GTX 1650">GTX 1650</option>
+    <option value="GTX 1660">GTX 1660</option>
+    <option value="MX 130">MX 130</option>
+    <option value="MX 330">MX 330</option>
+    <option value="MX 450">MX 450</option>
+    <option value="MX 550">MX 550</option>
+    <option value="P 500">P 500</option>
+    <option value="Radeon Pro 5300M">Radeon Pro 5300M</option>
+    <option value="Radeon Pro 5500M">Radeon Pro 5500M</option>
+    <option value="Radeon RX 6600M">Radeon RX 6600M</option>
+    <option value="Radeon Pro RX 560X">Radeon Pro RX 560X</option>
+    <option value="RX 6500M">RX 6500M</option>
+    <option value="RX 6600M">RX 6600M</option>
+    <option value="RX 6700M">RX 6700M</option>
+    <option value="RX 6800S">RX 6800S</option>
+    <option value="RX 7600S">RX 7600S</option>
+    <option value="RTX 2050">RTX 2050</option>
+    <option value="RTX 2060">RTX 2060</option>
+    <option value="RTX 2070">RTX 2070</option>
+    <option value="RTX 2080">RTX 2080</option>
+    <option value="RTX 3000">RTX 3000</option>
+    <option value="RTX 3050">RTX 3050</option>
+    <option value="RTX 3060">RTX 3060</option>
+    <option value="RTX 3070">RTX 3070</option>
+    <option value="RTX 3080">RTX 3080</option>
+    <option value="RTX 4050">RTX 4050</option>
+    <option value="RTX 4060">RTX 4060</option>
+    <option value="RTX 4070">RTX 4070</option>
+    <option value="RTX 4080">RTX 4080</option>
+    <option value="RTX 4090">RTX 4090</option>
+    <option value="RTX A1000">RTX A1000</option>
+    <option value="RTX A2000">RTX A2000</option>
+    <option value="RTX A3000">RTX A3000</option>
+    <option value="RTX A5500">RTX A5500</option>
+    <option value="T 1000">T 1000</option>
+    <option value="T 1200">T 1200</option>
+    <option value="T 2000">T 2000</option>
+    <option value="T 500">T 500</option>
+    <option value="T 550">T 550</option>
+    <option value="T 600">T 600</option>
+  </select>
+</div>
+
+
+<div style="clear:both;"></div>
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>
